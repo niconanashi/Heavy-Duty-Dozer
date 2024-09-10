@@ -4,7 +4,7 @@
 
 
 ゲームページ  
-https://niconanashi.github.io/Heavy-Duty-Dozer/
+https://niconanashi.github.io/Heavy-Duty-Dozer
 ## 操作方法
 
 アクセル : 画面左クリック  
