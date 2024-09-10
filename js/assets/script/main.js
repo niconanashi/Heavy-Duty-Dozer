@@ -21,20 +21,23 @@ function main(param) {
 		}else{
 			g.game.pushScene(createSceneA2());//ジープ
 		}
-	}else if(/^\d{1,16}$/.test(paramValue)){
-		randomGenerate2 =[];
-		var strNumber = String(paramValue);
-		while (strNumber.length < 16) {
-			strNumber = '0' + strNumber;
-		}
-		for (var i = 0; i < strNumber.length; i++) {
-			randomGenerate2.push(Number(strNumber[i]));
-		}
-		g.game.pushScene(createSceneA2());
-	}else if(paramValue==1e16){
-		g.game.pushScene(createSceneB());
 	}else{
-		alert("存在しないマップです。");
+		randomGenerate=paramValue/1e16;
+		if(/^\d{1,16}$/.test(paramValue)){
+			randomGenerate2 =[];
+			var strNumber = String(paramValue);
+			while (strNumber.length < 16) {
+				strNumber = '0' + strNumber;
+			}
+			for (var i = 0; i < strNumber.length; i++) {
+				randomGenerate2.push(Number(strNumber[i]));
+			}
+			g.game.pushScene(createSceneA2());
+		}else if(paramValue==1e16){
+			g.game.pushScene(createSceneB());
+		}else{
+			alert("存在しないマップです。");
+		}
 	}
 	function createSceneB() {
 		var scene = new g.Scene({game: g.game ,assetPaths: ["/**/*"]});
