@@ -13,8 +13,28 @@ function main(param) {
 	for(var i=0;i<16;i++){
 		randomGenerate2[i]=Math.floor(randomGenerate*(10**(i+1)))%10;
 	}
-	g.game.vars.gameState = { score: 0 };
-	var score=0;
+	if (paramValue===null){
+		var map=random.get(1, 20);
+		if(map==1){
+			g.game.pushScene(createSceneB());//雪
+		}else{
+			g.game.pushScene(createSceneA2());//ジープ
+		}
+	}else if(/^\d{1,16}$/.test(paramValue)){
+		randomGenerate2 =[];
+		var strNumber = String(paramValue);
+		while (strNumber.length < 16) {
+			strNumber = '0' + strNumber;
+		}
+		for (var i = 0; i < strNumber.length; i++) {
+			randomGenerate2.push(Number(strNumber[i]));
+		}
+		g.game.pushScene(createSceneA2());
+	}else if(paramValue==1e16){
+		g.game.pushScene(createSceneB());
+	}else{
+		alert("存在しないマップです。");
+	}
 	function createSceneB() {
 		var scene = new g.Scene({game: g.game ,assetPaths: ["/**/*"]});
 			var box2d = new b2.Box2D({
@@ -38,6 +58,8 @@ function main(param) {
 		var fo=false;
 		var seTime=0;
 		var hit=false;
+		g.game.vars.gameState = { score: 0 };
+		var score=0;
 		scene.onLoad.add(function () {
 			scene.asset.getAudioById("bgm").play();
 			var box2d = new b2.Box2D({
@@ -596,13 +618,14 @@ function main(param) {
 				parent:E
 			});
 			resetLabel.onPointDown.add(function () {
-				if(time>0){
+				//if(time>0){
 					reset=true;
+					gameTime = 30;
 					box2d.destroy();
 					camera.x=-225;
 					camera.y=-105;
 					g.game.replaceScene(createSceneB());
-				}
+				//}
 			});
 			function cameraXY(){
 				camera.x=(camera.x*3+rect1.x-500)/4;
@@ -670,7 +693,10 @@ function main(param) {
 			scene.setInterval(function() {
 				if(fo){smoke();}
 			}, 300);
-			console.log("map : 10000000000000000");
+			console.log("map : " + 1e16);
+			var url = new URL(window.location);
+			url.searchParams.set('map', encodeURIComponent(1e16));
+			window.history.pushState({}, '', url);
 		});
 		return scene;
 	}
@@ -686,8 +712,8 @@ function main(param) {
 			type: b2.BodyType.Static
 		});
 		var dynamicDef = box2d.createBodyDef({
-				type: b2.BodyType.Dynamic
-			});
+			type: b2.BodyType.Dynamic
+		});
 		var time=Math.ceil(gameTime);//json35→38
 		var labelTime=time;
 		var start=0;
@@ -699,6 +725,8 @@ function main(param) {
 		var seTime=0;
 		var hit=false;
 		var angleOver=0;
+		g.game.vars.gameState = { score: 0 };
+		var score=0;
 		scene.onLoad.add(function () {
 			scene.asset.getAudioById("bgm").play();
 			var bg = new g.FilledRect({
@@ -1405,13 +1433,14 @@ function main(param) {
 				parent:E
 			});
 			resetLabel.onPointDown.add(function () {
-				if(time>0){
+				//if(time>0){
 					reset=true;
+					gameTime = 30;
 					box2d.destroy();
 					camera.x=-225;
 					camera.y=-105;
 					g.game.replaceScene(createSceneA2());
-				}
+				//}
 			});
 			function cameraXY(){
 				camera.x=(camera.x*3+rect1.x-500)/4;
@@ -1479,8 +1508,10 @@ function main(param) {
 			scene.setInterval(function() {
 				if(fo){smoke();}
 			}, 100);
-			console.log("map : " + Math.floor(randomGenerate * 10 ** 16));
-			//console.log(`マップを保存: %c${""}`, "color: blue; text-decoration: underline;");
+			console.log("map : " + Math.floor(randomGenerate * 1e16));
+			var url = new URL(window.location);
+			url.searchParams.set('map', encodeURIComponent(Math.floor(randomGenerate * 1e16)));
+			window.history.pushState({}, '', url);
 		});
 		return scene;
 	}
@@ -1489,12 +1520,6 @@ function main(param) {
 		fontFamily: "sans-serif",
 		size: 48
 	});
-	var map=random.get(1, 20);
-	if(map==1){
-		g.game.pushScene(createSceneB());//雪
-	}else{
-		g.game.pushScene(createSceneA2());//ジープ
-	}
 	var bgColor="#0F5474";
 	/*
 	var hours = new Date(g.game.getCurrentTime()).getHours();
