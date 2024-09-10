@@ -176,7 +176,7 @@ function main(param) {
 				shape: box2d.createRectShape(floor.width, floor.height), // 地面エンティティを四角に設定
 				filter: {
 					categoryBits: 1,
-        maskBits: 7
+					maskBits: 7
 				}
 			});
 			// Box2Dに地面エンティティを追加
@@ -592,7 +592,7 @@ function main(param) {
 			});
 			var timeLabel = new g.Label({
 				scene: scene,
-				x: 50,
+				x: 25,
 				text: "TIME: "+time,
 				font: font,
 				fontSize: font.size,
@@ -602,7 +602,7 @@ function main(param) {
 			var resetLabel = new g.Label({
 				scene: scene,
 				x: 25,
-				y: 150,
+				y: 160,
 				text: "RESTART",
 				font: font,
 				fontSize: 24,
@@ -1428,7 +1428,7 @@ function main(param) {
 			});
 			var timeLabel = new g.Label({
 				scene: scene,
-				x: 50,
+				x: 25,
 				text: "TIME: "+time,
 				font: font,
 				fontSize: font.size,
@@ -1438,7 +1438,7 @@ function main(param) {
 			var resetLabel = new g.Label({
 				scene: scene,
 				x: 25,
-				y: 150,
+				y: 160,
 				text: "RESTART",
 				font: font,
 				fontSize: 24,
