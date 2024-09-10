@@ -367,12 +367,12 @@ function main(param) {
 				box2d.createFixtureDef({
 					density: 0.5,//密度
 					friction: 0.5,//摩擦0.5
-					restitution: 0, // 反発係数0.5
+					restitution: 0.2, // 反発係数0.5
 					shape: box2d.createRectShape(rect1.width, rect1.height),
 					filter: {
 						categoryBits: 2,
 						maskBits: 1
-		            }
+					}
 				})
 			  );
 			// rect2
@@ -382,12 +382,12 @@ function main(param) {
 				box2d.createFixtureDef({
 					density: 0.1,//密度0.1
 					friction: 0.5,//摩擦
-					restitution: 0, // 反発係数
+					restitution: 0.2, // 反発係数
 					shape: box2d.createRectShape(rect2.width, rect2.height),
 					filter: {
 						categoryBits: 2,
 						maskBits: 1
-		            }
+					}
 				})
 			);
 			// rect4
@@ -397,12 +397,12 @@ function main(param) {
 				box2d.createFixtureDef({
 					density: 0.8,//密度0.1
 					friction: 0.1,//摩擦
-					restitution: 0, // 反発係数
+					restitution: 0.2, // 反発係数
 					shape: box2d.createRectShape(rect4.width, rect4.height),
 					filter: {
 						categoryBits: 2,
 						maskBits: 5
-		            }
+					}
 				})
 			);
 
@@ -419,7 +419,7 @@ function main(param) {
 						categoryBits: 2,
 						maskBits: 5
 					}
-		        })
+				})
 			);
 			// タイヤ2
 			var c = box2d.createBody(
@@ -1123,9 +1123,9 @@ function main(param) {
 					restitution: 0, // 反発係数
 					shape: box2d.createRectShape(ki2.width-40, ki2.height-30),
 					filter: {
-		                    categoryBits: 4,
-		                    maskBits: 3
-		            }
+						categoryBits: 4,
+						maskBits: 3
+					}
 				})
 			);
 			var beltW = 20;
@@ -1209,12 +1209,12 @@ function main(param) {
 				box2d.createFixtureDef({
 					density: 0.5,//密度
 					friction: 0.5,//摩擦0.5
-					restitution: 0, // 反発係数0.5
+					restitution: 0.2, // 反発係数0.5
 					shape: box2d.createRectShape(rect1.width, rect1.height),
 					filter: {
 						ategoryBits: 2,
 						maskBits: 1
-		            }
+					}
 				})
 			  );
 			// rect2
@@ -1224,12 +1224,12 @@ function main(param) {
 				box2d.createFixtureDef({
 					density: 0.1,//密度0.1
 					friction: 0.5,//摩擦
-					restitution: 0, // 反発係数
+					restitution: 0.2, // 反発係数
 					shape: box2d.createRectShape(rect2.width, rect2.height),
 					filter: {
 						categoryBits: 2,
 						maskBits: 1
-		            }
+					}
 				})
 			);
 			// rect4
@@ -1238,13 +1238,13 @@ function main(param) {
 				dynamicDef,
 				box2d.createFixtureDef({
 					density: 0.8,//密度0.1
-					friction: 0,//摩擦
-					restitution: 0, // 反発係数
+					friction: 0.1,//摩擦
+					restitution: 0.2, // 反発係数
 					shape: box2d.createRectShape(rect4.width, rect4.height),
 					filter: {
 						categoryBits: 2,
 						maskBits: 5
-		            }
+					}
 				})
 			);
 
@@ -1261,7 +1261,7 @@ function main(param) {
 						categoryBits: 2,
 						maskBits: 5
 					}
-		        })
+			        })
 			);
 			// タイヤ2
 			var c = box2d.createBody(
