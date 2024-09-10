@@ -434,7 +434,7 @@ function main(param) {
 						categoryBits: 2,
 						maskBits: 5
 					}
-		        })
+				})
 			);
 			var beltsBody = [];
 			for (var i = 0; i < belts.length; i++) {
@@ -481,8 +481,8 @@ function main(param) {
 			var def4 = new b2.Box2DWeb.Dynamics.Joints.b2RevoluteJointDef();
 			def4.Initialize(a.b2Body, b.b2Body, box2d.vec2(tire1.x, tire1.y));
 			def4.maxMotorTorque = 3;
-	        def4.motorSpeed = 0;
-	        def4.enableMotor = true;
+			def4.motorSpeed = 0;
+			def4.enableMotor = true;
 			var def5 = new b2.Box2DWeb.Dynamics.Joints.b2RevoluteJointDef();
 			def5.Initialize(a.b2Body, c.b2Body, box2d.vec2(tire2.x, tire2.y));
 			def5.enableMotor = false;
@@ -1212,7 +1212,7 @@ function main(param) {
 					restitution: 0.2, // 反発係数0.5
 					shape: box2d.createRectShape(rect1.width, rect1.height),
 					filter: {
-						ategoryBits: 2,
+						categoryBits: 2,
 						maskBits: 1
 					}
 				})
@@ -1276,7 +1276,7 @@ function main(param) {
 						categoryBits: 2,
 						maskBits: 5
 					}
-		        })
+			        })
 			);
 			var beltsBody = [];
 			for (var i = 0; i < belts.length; i++) {
