@@ -6,6 +6,7 @@ var params = new URLSearchParams(window.location.search);
 var paramValue = params.get("map");
 g.game.focusingCamera = camera;
 function main(param) {
+	var bgColor="#0F5474";
 	var random = param.random;
 	var gameTime = 30;
 	var randomGenerate = random.generate();//1700419934089485
@@ -601,8 +602,19 @@ function main(param) {
 			var resetLabel = new g.Label({
 				scene: scene,
 				x: 25,
+				y: 150,
+				text: "RESTART",
+				font: font,
+				fontSize: 24,
+				textColor: "silver",
+				touchable: true,
+				parent:E
+			});
+			var newLabel = new g.Label({
+				scene: scene,
+				x: 25,
 				y: 100,
-				text: "リセット",
+				text: "NEW STAGE",
 				font: font,
 				fontSize: 24,
 				textColor: "silver",
@@ -618,14 +630,30 @@ function main(param) {
 				parent:E
 			});
 			resetLabel.onPointDown.add(function () {
-				//if(time>0){
-					reset=true;
-					gameTime = 30;
-					box2d.destroy();
-					camera.x=-225;
-					camera.y=-105;
-					g.game.replaceScene(createSceneB());
-				//}
+				reset=true;
+				gameTime = 30;
+				box2d.destroy();
+				camera.x=-225;
+				camera.y=-105;
+				g.game.replaceScene(createSceneB());
+			});
+			newLabel.onPointDown.add(function () {
+				reset=true;
+				gameTime = 30;
+				box2d.destroy();
+				camera.x=-225;
+				camera.y=-105;
+				randomGenerate = random.generate();
+				randomGenerate2 =[];
+				for(var i=0;i<16;i++){
+					randomGenerate2[i]=Math.floor(randomGenerate*(10**(i+1)))%10;
+				}
+				var map=random.get(1, 30);
+				if(map==1){
+					g.game.pushScene(createSceneB());//雪
+				}else{
+					g.game.pushScene(createSceneA2());//ジープ
+				}
 			});
 			function cameraXY(){
 				camera.x=(camera.x*3+rect1.x-500)/4;
@@ -1295,8 +1323,8 @@ function main(param) {
 			var def4 = new b2.Box2DWeb.Dynamics.Joints.b2RevoluteJointDef();
 			def4.Initialize(a.b2Body, b.b2Body, box2d.vec2(tire1.x, tire1.y));
 			def4.maxMotorTorque = 3;
-	        def4.motorSpeed = 0;
-	        def4.enableMotor = true;
+			def4.motorSpeed = 0;
+			def4.enableMotor = true;
 			var def5 = new b2.Box2DWeb.Dynamics.Joints.b2RevoluteJointDef();
 			def5.Initialize(a.b2Body, c.b2Body, box2d.vec2(tire2.x, tire2.y));
 			def5.enableMotor = false;
@@ -1313,44 +1341,38 @@ function main(param) {
 			var L=false;
 			var R=false;
 			scene.onPointDownCapture.add(function (e) {
-				
-					if (e.button === 2) {
+				if (e.button === 2) {
+					reverse();R=true;
+				}else{
+					on();L=true;
+				}
+			});
+			scene.onPointUpCapture.add(function (e) {
+				if (e.button === 0) {
+					seOff();
+				}
+				off();
+			});
+			scene.onPointMoveCapture.add(function (e) {
+				if (e.button === 2) {
+					if(R){
+						on();R=false;
+					}else{
+						seOff();
 						reverse();R=true;
+					}
+				}else if (e.button === 0) {
+					if(L){
+						seOff();
+						reverse();L=false;
 					}else{
 						on();L=true;
 					}
-				
-			});
-			scene.onPointUpCapture.add(function (e) {
-				
-					if (e.button === 0) {
-						seOff();
-					}
-					off();
-				
-			});
-			scene.onPointMoveCapture.add(function (e) {
-				
-					if (e.button === 2) {
-						if(R){
-							on();R=false;
-						}else{
-							seOff();
-							reverse();R=true;
-						}
-					}else if (e.button === 0) {
-						if(L){
-							seOff();
-							reverse();L=false;
-						}else{
-							on();L=true;
-						}
-					}
-					else if(e.prevDelta.x<-20){
-						seOff();
-						reverse();
-					}
-			
+				}
+				else if(e.prevDelta.x<-20){
+					seOff();
+					reverse();
+				}
 			});
 			function on(){
 				joint4.SetMaxMotorTorque(30);
@@ -1416,8 +1438,19 @@ function main(param) {
 			var resetLabel = new g.Label({
 				scene: scene,
 				x: 25,
+				y: 150,
+				text: "RESTART",
+				font: font,
+				fontSize: 24,
+				textColor: "white",
+				touchable: true,
+				parent:E
+			});
+			var newLabel = new g.Label({
+				scene: scene,
+				x: 25,
 				y: 100,
-				text: "リセット",
+				text: "NEW STAGE",
 				font: font,
 				fontSize: 24,
 				textColor: "white",
@@ -1433,14 +1466,30 @@ function main(param) {
 				parent:E
 			});
 			resetLabel.onPointDown.add(function () {
-				//if(time>0){
-					reset=true;
-					gameTime = 30;
-					box2d.destroy();
-					camera.x=-225;
-					camera.y=-105;
-					g.game.replaceScene(createSceneA2());
-				//}
+				reset=true;
+				gameTime = 30;
+				box2d.destroy();
+				camera.x=-225;
+				camera.y=-105;
+				g.game.replaceScene(createSceneA2());
+			});
+			newLabel.onPointDown.add(function () {
+				reset=true;
+				gameTime = 30;
+				box2d.destroy();
+				camera.x=-225;
+				camera.y=-105;
+				randomGenerate = random.generate();
+				randomGenerate2 =[];
+				for(var i=0;i<16;i++){
+					randomGenerate2[i]=Math.floor(randomGenerate*(10**(i+1)))%10;
+				}
+				var map=random.get(1, 30);
+				if(map==1){
+					g.game.pushScene(createSceneB());//雪
+				}else{
+					g.game.pushScene(createSceneA2());//ジープ
+				}
 			});
 			function cameraXY(){
 				camera.x=(camera.x*3+rect1.x-500)/4;
@@ -1520,7 +1569,6 @@ function main(param) {
 		fontFamily: "sans-serif",
 		size: 48
 	});
-	var bgColor="#0F5474";
 	/*
 	var hours = new Date(g.game.getCurrentTime()).getHours();
 	if (hours >= 2 && hours < 3) {
