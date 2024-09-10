@@ -2,6 +2,8 @@ window.gLocalAssetContainer["main"] = function(g) { (function(exports, require, 
 exports.main = void 0;
 var b2 = require("@akashic-extension/akashic-box2d");
 var camera = new g.Camera2D({x:-225,y:-105});
+var params = new URLSearchParams(window.location.search);
+var paramValue = params.get("map");
 g.game.focusingCamera = camera;
 function main(param) {
 	var random = param.random;
