@@ -89,7 +89,7 @@ function main(param) {
 				height: 50,
 				parent: scene
 			});
-			var stop=false;
+			var stop=false;//コース作製用
 			/*var floorD = new g.FilledRect({
 				scene: scene,
 				cssColor: "red",
@@ -499,48 +499,6 @@ function main(param) {
 			def6.joint2 = joint4;
 			def6.ratio = -1;
 			var gearJoint = box2d.world.CreateJoint(def6);
-			var L=false;
-			var R=false;
-			scene.onPointDownCapture.add(function (e) {
-				if(!stop){
-					if (e.button === 2) {
-						reverse();R=true;
-					}else{
-						on();L=true;
-					}
-				}
-			});
-			scene.onPointUpCapture.add(function (e) {
-				if(!stop){
-					if (e.button === 0) {
-						seOff();
-					}
-					off();
-				}
-			});
-			scene.onPointMoveCapture.add(function (e) {
-				if(!stop){
-					if (e.button === 2) {
-						if(R){
-							on();R=false;
-						}else{
-							seOff();
-							reverse();R=true;
-						}
-					}else if (e.button === 0) {
-						if(L){
-							seOff();
-							reverse();L=false;
-						}else{
-							on();L=true;
-						}
-					}
-					else if(e.prevDelta.x<-20){
-						seOff();
-						reverse();
-					}
-				}
-			});
 			function on(){
 				joint4.SetMaxMotorTorque(100);
 				joint4.SetMotorSpeed(8);
@@ -582,6 +540,9 @@ function main(param) {
 				scene: scene,
 				x: camera.x,
 				y: camera.y,
+				width: 1280,
+				height: 720,
+				touchable: true,
 				parent:scene
 			});
 			var scoreLabel = new g.Label({
@@ -656,6 +617,48 @@ function main(param) {
 					g.game.pushScene(createSceneB());//雪
 				}else{
 					g.game.pushScene(createSceneA2());//ジープ
+				}
+			});
+			var L=false;
+			var R=false;
+			E.onPointDown.add(function (e) {
+				if(!stop){//コース作製用
+					if (e.button === 2) {
+						reverse();R=true;
+					}else{
+						on();L=true;
+					}
+				}
+			});
+			E.onPointUp.add(function (e) {
+				if(!stop){
+					if (e.button === 0) {
+						seOff();
+					}
+					off();
+				}
+			});
+			E.onPointMove.add(function (e) {
+				if(!stop){
+					if (e.button === 2) {
+						if(R){
+							on();R=false;
+						}else{
+							seOff();
+							reverse();R=true;
+						}
+					}else if (e.button === 0) {
+						if(L){
+							seOff();
+							reverse();L=false;
+						}else{
+							on();L=true;
+						}
+					}
+					else if(e.prevDelta.x<-20){
+						seOff();
+						reverse();
+					}
 				}
 			});
 			function cameraXY(){
@@ -1341,42 +1344,6 @@ function main(param) {
 			def6.joint2 = joint4;
 			def6.ratio = -1;
 			var gearJoint = box2d.world.CreateJoint(def6);
-			var L=false;
-			var R=false;
-			scene.onPointDownCapture.add(function (e) {
-				if (e.button === 2) {
-					reverse();R=true;
-				}else{
-					on();L=true;
-				}
-			});
-			scene.onPointUpCapture.add(function (e) {
-				if (e.button === 0) {
-					seOff();
-				}
-				off();
-			});
-			scene.onPointMoveCapture.add(function (e) {
-				if (e.button === 2) {
-					if(R){
-						on();R=false;
-					}else{
-						seOff();
-						reverse();R=true;
-					}
-				}else if (e.button === 0) {
-					if(L){
-						seOff();
-						reverse();L=false;
-					}else{
-						on();L=true;
-					}
-				}
-				else if(e.prevDelta.x<-20){
-					seOff();
-					reverse();
-				}
-			});
 			function on(){
 				joint4.SetMaxMotorTorque(30);
 				joint4.SetMotorSpeed(30);
@@ -1418,6 +1385,9 @@ function main(param) {
 				scene: scene,
 				x: camera.x,
 				y: camera.y,
+				width: 1280,
+				height: 720,
+				touchable: true,
 				parent:scene
 			});
 			var scoreLabel = new g.Label({
@@ -1492,6 +1462,42 @@ function main(param) {
 					g.game.pushScene(createSceneB());//雪
 				}else{
 					g.game.pushScene(createSceneA2());//ジープ
+				}
+			});
+			var L=false;
+			var R=false;
+			E.onPointDown.add(function (e) {
+				if (e.button === 2) {
+					reverse();R=true;
+				}else{
+					on();L=true;
+				}
+			});
+			E.onPointUp.add(function (e) {
+				if (e.button === 0) {
+					seOff();
+				}
+				off();
+			});
+			E.onPointMove.add(function (e) {
+				if (e.button === 2) {
+					if(R){
+						on();R=false;
+					}else{
+						seOff();
+						reverse();R=true;
+					}
+				}else if (e.button === 0) {
+					if(L){
+						seOff();
+						reverse();L=false;
+					}else{
+						on();L=true;
+					}
+				}
+				else if(e.prevDelta.x<-20){
+					seOff();
+					reverse();
 				}
 			});
 			function cameraXY(){
